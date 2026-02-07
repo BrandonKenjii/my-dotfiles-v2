@@ -1,0 +1,160 @@
+[global]
+    # Display
+    monitor = 0
+    follow = mouse
+
+    # Geometry
+    width = (280, 800)
+    height = 180
+    origin = top-right
+    offset = 16x16
+    notification_limit = 5
+    gap_size = 8
+
+    # Progress bar
+    progress_bar = true
+    progress_bar_height = 12
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 200
+    progress_bar_max_width = 360
+    progress_bar_corner_radius = 4
+    highlight = "#a7c080"
+
+    # Appearance
+    transparency = 0
+    corner_radius = 12
+    frame_width = 2
+    frame_color = "#a7c080"
+    separator_height = 2
+    separator_color = frame
+    padding = 14
+    horizontal_padding = 14
+    text_icon_padding = 14
+
+    # Text
+    font = JetBrainsMono Nerd Font 11
+    line_height = 4
+    markup = full
+    format = "<b>%s</b>\n%b"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 60
+    word_wrap = yes
+    ellipsize = middle
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = no
+    indicate_hidden = yes
+
+    # Icons
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 48
+    icon_corner_radius = 6
+    icon_path = /usr/share/icons/Papirus-Dark/48x48/apps/:/usr/share/icons/Papirus-Dark/48x48/status/:/usr/share/icons/Papirus-Dark/48x48/devices/
+
+    # History
+    sticky_history = yes
+    history_length = 20
+
+    # Interaction
+    mouse_left_click = close_current
+    mouse_middle_click = do_action, close_current
+    mouse_right_click = close_all
+    dmenu = /usr/bin/rofi -dmenu -p dunst
+    browser = /usr/bin/xdg-open
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    ignore_dbusclose = false
+    sort = yes
+    idle_threshold = 120
+
+[experimental]
+    per_monitor_dpi = false
+
+[urgency_low]
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#3d484d"
+    highlight = "#859289"
+    timeout = 5
+
+[urgency_normal]
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#a7c080"
+    highlight = "#a7c080"
+    timeout = 10
+
+[urgency_critical]
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#e67e80"
+    highlight = "#e67e80"
+    timeout = 0
+
+# Volume - purple progress bar, subtle frame
+[volume]
+    appname = "volume"
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#3d484d"
+    highlight = "#d699b6"
+    format = "<b>%s</b>"
+    timeout = 2
+    history_ignore = yes
+
+# Brightness - yellow progress bar, subtle frame
+[brightness]
+    appname = "brightness"
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#3d484d"
+    highlight = "#dbbc7f"
+    format = "<b>%s</b>"
+    timeout = 2
+    history_ignore = yes
+
+# Spotify (brand colors - not themed)
+[spotify]
+    appname = Spotify
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#1db954"
+    highlight = "#1db954"
+    format = "<b>Now Playing</b>\n<b>%s</b>\n%b"
+    timeout = 5
+    min_icon_size = 64
+    max_icon_size = 64
+    script = ~/.config/dunst/scripts/spotify-notify.sh
+
+# Discord (brand colors - not themed)
+[discord]
+    appname = Discord
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#5865f2"
+    format = "<b>%s</b>\n%b"
+    timeout = 8
+
+[discord-dm]
+    appname = Discord
+    summary = "*Direct Message*"
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#eb459e"
+    format = "<b>%s</b>\n%b"
+    timeout = 10
+    urgency = normal
+
+[discord-mention]
+    appname = Discord
+    body = "*@*"
+    background = "#2d353b"
+    foreground = "#d3c6aa"
+    frame_color = "#faa61a"
+    format = "<b>%s</b>\n%b"
+    timeout = 10
+    urgency = normal

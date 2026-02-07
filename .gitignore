@@ -1,0 +1,150 @@
+# Ignore everything by default, then whitelist tracked configs.
+*
+
+# Install scripts and shared utilities
+!install.sh
+!install-packages.sh
+!scripts/
+!scripts/*
+
+# Shell configs
+!.bash_profile
+!.bashrc
+.bash_history
+.bash_logout
+
+# Git
+!.gitconfig
+!.gitignore
+
+# Markdown files
+!*.md
+
+# --- .config directory ---
+!.config
+
+# Hyprland
+!.config/hypr
+!.config/hypr/*
+!.config/hypr/**/*
+
+# Kitty terminal
+!.config/kitty
+!.config/kitty/*
+!.config/kitty/**/*
+
+# Neovim
+!.config/nvim
+!.config/nvim/*
+!.config/nvim/**/*
+!.config/nvim/*/*/*
+!.config/nvim/*/*/*/*
+!.config/nvim/*/*/*/*/*
+
+# Waybar
+!.config/waybar
+!.config/waybar/*
+!.config/waybar/**/*
+
+# Rofi
+!.config/rofi
+!.config/rofi/*
+!.config/rofi/**/*
+
+# Dunst
+!.config/dunst
+!.config/dunst/*
+!.config/dunst/**/*
+
+# AGS
+!.config/ags
+!.config/ags/*
+!.config/ags/**/*
+.config/ags/node_modules
+.config/ags/node_modules/**/*
+.config/ags/@girs
+.config/ags/@girs/**/*
+
+# GTK theming
+!.config/gtk-3.0
+!.config/gtk-3.0/*
+!.config/gtk-4.0
+!.config/gtk-4.0/*
+
+# Fastfetch
+!.config/fastfetch
+!.config/fastfetch/*
+
+# Fontconfig
+!.config/fontconfig
+!.config/fontconfig/*
+!.config/fontconfig/**/*
+
+# Image viewer
+!.config/imv
+!.config/imv/*
+
+# Wallpaper
+!.config/swww
+!.config/swww/*
+
+# Audio
+!.config/pipewire
+!.config/pipewire/*
+!.config/pipewire/**/*
+!.config/wireplumber
+!.config/wireplumber/*
+!.config/wireplumber/**/*
+!.config/easyeffects
+!.config/easyeffects/*
+!.config/easyeffects/**/*
+
+# Input
+!.config/ibus
+!.config/ibus/*
+
+# File manager
+!.config/Thunar
+!.config/Thunar/*
+!.config/Thunar/**/*
+
+# XFCE4
+!.config/xfce4
+!.config/xfce4/**/*
+
+# Systemd user services
+!.config/systemd/
+!.config/systemd/user
+!.config/systemd/user/*
+!.config/systemd/user/*/*
+
+# User scripts
+!.config/usr-scripts
+!.config/usr-scripts/*
+
+# Theme switcher
+!.config/theme
+!.config/theme/*
+!.config/theme/**/*
+
+# Config files in .config root
+!.config/mimeapps.list
+!.config/pavucontrol.ini
+
+# Ignore application caches and runtime data
+.config/chromium
+.config/chromium/**/*
+.config/google-chrome
+.config/google-chrome/**/*
+.config/discord
+.config/discord/**/*
+.config/spotify
+.config/spotify/**/*
+.config/Code
+.config/Code/**/*
+.config/dconf
+.config/dconf/**/*
+.config/pulse
+.config/pulse/**/*
+.config/yay
+.config/yay/**/*

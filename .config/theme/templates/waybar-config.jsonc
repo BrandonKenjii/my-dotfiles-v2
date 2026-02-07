@@ -1,0 +1,207 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 42,
+    "spacing": 0,
+    "reload_style_on_change": true,
+
+    // Module positions
+    "modules-left": [
+        "hyprland/workspaces",
+        "custom/separator",
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "custom/spotify"
+    ],
+    "modules-right": [
+        "custom/updates",
+        "custom/weather",
+        "custom/separator",
+        "backlight",
+        "pulseaudio",
+        "network",
+        "custom/separator",
+        "battery",
+        "clock"
+    ],
+
+    // Workspaces
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "format-icons": {
+            "1": "󰎤",
+            "2": "󰎧",
+            "3": "󰎪",
+            "4": "󰎭",
+            "5": "󰎱",
+            "6": "󰎳",
+            "7": "󰎶",
+            "8": "󰎹",
+            "9": "󰎼",
+            "10": "󰽽",
+            "urgent": "",
+            "active": "",
+            "default": ""
+        },
+        "on-click": "activate",
+        "on-scroll-up": "hyprctl dispatch workspace e+1",
+        "on-scroll-down": "hyprctl dispatch workspace e-1",
+        "all-outputs": true,
+        "show-special": true,
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+
+    // Window title
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50,
+        "separate-outputs": true,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "󰈹 $1",
+            "(.*) - Visual Studio Code": "󰨞 $1",
+            "(.*) - Discord": "󰙯 $1",
+            "kitty": " Terminal",
+            "thunar": "󰉋 Files",
+            "Spotify": "󰓇 Spotify"
+        }
+    },
+
+    // Clock with calendar
+    "clock": {
+        "format": "󰥔 {:%H:%M}",
+        "format-alt": "󰃭 {:%A, %B %d, %Y}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='@ACCENT@'><b>{}</b></span>",
+                "days": "<span color='@FG@'>{}</span>",
+                "weeks": "<span color='@GREEN@'>W{}</span>",
+                "weekdays": "<span color='@ORANGE@'>{}</span>",
+                "today": "<span color='@RED@'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    // Battery
+    "battery": {
+        "states": {
+            "good": 80,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": "󰂄 {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "tooltip-format": "{timeTo}\nHealth: {health}%\nPower: {power:.1f}W"
+    },
+
+    // Backlight
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "~/.config/hypr/scripts/brightness.sh up",
+        "on-scroll-down": "~/.config/hypr/scripts/brightness.sh down",
+        "on-click": "brightnessctl set 50%"
+    },
+
+    // Audio
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "󰂱 {volume}%",
+        "format-bluetooth-muted": "󰂲",
+        "format-muted": "󰝟",
+        "format-icons": {
+            "headphone": "󰋋",
+            "hands-free": "󰋎",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "tooltip-format": "{desc}\n{volume}% | {format_source}",
+        "on-click": "pavucontrol",
+        "on-click-right": "~/.config/hypr/scripts/volume.sh mute",
+        "on-scroll-up": "~/.config/hypr/scripts/volume.sh up",
+        "on-scroll-down": "~/.config/hypr/scripts/volume.sh down"
+    },
+
+    // Network
+    "network": {
+        "format-wifi": "󰤨 {signalStrength}%",
+        "format-ethernet": "󰈀",
+        "format-linked": "󰈀 (No IP)",
+        "format-disconnected": "󰤭",
+        "format-alt": "{essid} | {ipaddr}/{cidr}",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}\nGateway: {gwaddr}\n\n{bandwidthUpBits}  {bandwidthDownBits}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ifname}: {ipaddr}/{cidr}\n\n {bandwidthUpBits}  {bandwidthDownBits}",
+        "tooltip-format-ethernet": "{ifname}: {ipaddr}/{cidr}\nGateway: {gwaddr}\n\n {bandwidthUpBits}  {bandwidthDownBits}",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "nm-connection-editor",
+        "on-click-right": "kitty --class floating -e nmtui",
+        "interval": 5
+    },
+
+    // Custom separator
+    "custom/separator": {
+        "format": "│",
+        "tooltip": false
+    },
+
+    // Spotify (event-driven via playerctl -F)
+    "custom/spotify": {
+        "format": "{icon} {text}",
+        "format-icons": {
+            "Playing": "󰓇",
+            "Paused": "󰏤",
+            "stopped": "󰓛"
+        },
+        "return-type": "json",
+        "max-length": 40,
+        "exec": "~/.config/waybar/scripts/spotify_status.sh",
+        "exec-if": "pgrep spotify",
+        "on-click": "~/.config/waybar/scripts/ags_media_toggle.sh",
+        "on-click-right": "playerctl -p spotify next",
+        "on-click-middle": "playerctl -p spotify previous",
+        "on-scroll-up": "playerctl -p spotify volume 0.05+",
+        "on-scroll-down": "playerctl -p spotify volume 0.05-",
+        "escape": true,
+        "tooltip": true
+    },
+
+    // Package updates (Arch/AUR)
+    "custom/updates": {
+        "format": "󰏔 {}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/updates.sh",
+        "exec-if": "which checkupdates",
+        "interval": 3600,
+        "on-click": "kitty --class floating -e yay -Syu",
+        "tooltip": true
+    },
+
+    // Weather
+    "custom/weather": {
+        "format": "{}",
+        "return-type": "json",
+        "exec": "~/.config/waybar/scripts/weather.sh",
+        "interval": 1800,
+        "on-click": "xdg-open 'https://wttr.in'",
+        "tooltip": true
+    }
+}
