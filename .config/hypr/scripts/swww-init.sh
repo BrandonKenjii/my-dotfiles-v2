@@ -11,8 +11,8 @@ fi
 THEME_DIR="$HOME/.config/theme"
 CURRENT_THEME=$(cat "$THEME_DIR/current" 2>/dev/null)
 THEME_WALLPAPER=""
-if [[ -n "$CURRENT_THEME" && -f "$THEME_DIR/themes/${CURRENT_THEME}.conf" ]]; then
-    THEME_WALLPAPER=$(grep '^WALLPAPER=' "$THEME_DIR/themes/${CURRENT_THEME}.conf" | cut -d'"' -f2)
+if [[ -n "$CURRENT_THEME" && -f "$THEME_DIR/themes/${CURRENT_THEME,,}.conf" ]]; then
+    THEME_WALLPAPER=$(grep '^WALLPAPER=' "$THEME_DIR/themes/${CURRENT_THEME,,}.conf" | cut -d'"' -f2)
 fi
 
 # Use theme wallpaper, argument override, or fallback

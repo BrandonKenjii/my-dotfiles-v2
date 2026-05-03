@@ -1,4 +1,5 @@
-/* Rofi Wallpaper Selector Theme - with image preview */
+/* Rofi Wallpaper Selector Theme */
+/* Preview is handled by a separate imv/feh window beside rofi */
 
 * {
     bg:           #2d353be6;
@@ -15,42 +16,22 @@
 }
 
 window {
-    width: 1000px;
-    height: 600px;
+    width: 20px;
+    height: 20px;
     border: 2px solid;
     border-color: @border;
     border-radius: 12px;
     background-color: @bg;
     transparency: "real";
+    x-offset: 230px;
+    y-offset: 0px;
 }
 
 mainbox {
     background-color: @transparent;
-    children: [imagebox, inputbar-listview];
-    spacing: 0px;
-    orientation: horizontal;
-}
-
-imagebox {
-    background-color: @bg-alt;
-    border: 0px 2px 0px 0px;
-    border-color: @border;
-    padding: 20px;
-    children: [image-dummy];
-    expand: true;
-    width: 480px;
-}
-
-image-dummy {
-    background-image: url("/tmp/wallpaper-preview.jpg", width);
-    size: 440px;
-}
-
-inputbar-listview {
-    children: [inputbar, listview];
+    children: [inputbar, message, listview];
     spacing: 10px;
     padding: 20px;
-    expand: true;
 }
 
 inputbar {
@@ -71,10 +52,23 @@ entry {
     placeholder-color: @fg-alt;
 }
 
+message {
+    background-color: @transparent;
+    border: 1px dash;
+    border-color: @fg-alt;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+textbox {
+    background-color: @transparent;
+    text-color: @fg-alt;
+}
+
 listview {
     background-color: @transparent;
     columns: 1;
-    lines: 12;
+    lines: 10;
     spacing: 4px;
     scrollbar: true;
     border: 0px;

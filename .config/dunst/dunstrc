@@ -4,7 +4,7 @@
     follow = mouse
 
     # Geometry
-    width = (280, 800)
+    width = 500
     height = 180
     origin = top-right
     offset = 16x16

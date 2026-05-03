@@ -3,11 +3,16 @@
 # Enter: preview | Ctrl+Enter: apply | Escape: cancel
 
 WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-IMV_PID=""
+IMV_TITLE="wallpaper-preview"
+IMV_RULE_FLOAT="float,title:^(${IMV_TITLE})$"
+IMV_RULE_SIZE="size 420 500,title:^(${IMV_TITLE})$"
+IMV_RULE_MOVE="move 250 155,title:^(${IMV_TITLE})$"
 
 cleanup() {
-    [ -n "$IMV_PID" ] && kill "$IMV_PID" 2>/dev/null
-    hyprctl keyword windowrulev2 "unset,class:(imv)" &>/dev/null
+    pkill -f "imv.*${IMV_TITLE}" 2>/dev/null
+    hyprctl keyword windowrulev2 "unset,$IMV_RULE_FLOAT" &>/dev/null
+    hyprctl keyword windowrulev2 "unset,$IMV_RULE_SIZE" &>/dev/null
+    hyprctl keyword windowrulev2 "unset,$IMV_RULE_MOVE" &>/dev/null
 }
 trap cleanup EXIT
 
@@ -20,7 +25,8 @@ if [ ${#WALLPAPERS[@]} -eq 0 ]; then
 fi
 
 # Get current wallpaper
-CURRENT=$(swww query 2>/dev/null | grep -oP 'image: \K.*' | xargs basename 2>/dev/null)
+CURRENT_PATH=$(swww query 2>/dev/null | sed -n 's/.*image: //p' | head -n1)
+CURRENT=$(basename -- "$CURRENT_PATH" 2>/dev/null)
 [ -z "$CURRENT" ] && CURRENT="${WALLPAPERS[0]}"
 
 # Monitor dimensions
@@ -40,14 +46,16 @@ CENTER_Y=$(((MON_H - PREVIEW_H) / 2))
 ROFI_CENTER_X=$((START_X + PREVIEW_W + GAP + ROFI_W / 2))
 ROFI_OFFSET=$((ROFI_CENTER_X - MON_W / 2))
 
-# Temporary window rules for imv preview (overrides default imv rules)
-hyprctl keyword windowrulev2 "float,class:(imv)"
-hyprctl keyword windowrulev2 "size $PREVIEW_W $PREVIEW_H,class:(imv)"
-hyprctl keyword windowrulev2 "move $START_X $CENTER_Y,class:(imv)"
+# Temporary window rules for the dedicated imv preview window only
+IMV_RULE_SIZE="size $PREVIEW_W $PREVIEW_H,title:^(${IMV_TITLE})$"
+IMV_RULE_MOVE="move $START_X $CENTER_Y,title:^(${IMV_TITLE})$"
+hyprctl keyword windowrulev2 "$IMV_RULE_FLOAT"
+hyprctl keyword windowrulev2 "$IMV_RULE_SIZE"
+hyprctl keyword windowrulev2 "$IMV_RULE_MOVE"
 
 # Start imv with current wallpaper
-imv "$WALLPAPER_DIR/$CURRENT" &
-IMV_PID=$!
+imv -W "$IMV_TITLE" -s shrink "$WALLPAPER_DIR/$CURRENT" &
+sleep 0.2
 
 # Find current wallpaper's row index
 ROW=0
@@ -77,10 +85,8 @@ while true; do
             for i in "${!WALLPAPERS[@]}"; do
                 [ "${WALLPAPERS[$i]}" = "$SELECTED" ] && ROW=$i && break
             done
-            kill "$IMV_PID" 2>/dev/null
-            wait "$IMV_PID" 2>/dev/null
-            imv "$WALLPAPER_DIR/$SELECTED" &
-            IMV_PID=$!
+            imv-msg "$IMV_TITLE" close all 2>/dev/null
+            imv-msg "$IMV_TITLE" open "$WALLPAPER_DIR/$SELECTED" 2>/dev/null
             ;;
         10)
             # Ctrl+Enter: apply wallpaper
